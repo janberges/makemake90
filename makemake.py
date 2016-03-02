@@ -6,6 +6,7 @@ import re
 compiler = 'gfortran'
 optional = '-std=f2003 -Wall -pedantic'
 external = ''
+needless = '.DS_Store'
 
 if os.path.exists('makefile'):
     with open('makefile') as makefile:
@@ -15,7 +16,7 @@ if os.path.exists('makefile'):
 
         for line in makefile:
             match = re.match(
-                r'\s*(compiler|optional|external)\s*=\s*(.*)', line)
+                r'\s*(compiler|optional|external|needless)\s*=\s*(.*)', line)
 
             if match:
                 globals()[match.group(1)] = match.group(2).rstrip()
@@ -101,6 +102,7 @@ with open('makefile', 'w') as makefile:
 compiler = {compiler}
 optional = {optional}
 external = {external}
+needless = {needless}
 programs = {programs}
 
 .PHONY: all clean cleaner
@@ -108,7 +110,7 @@ programs = {programs}
 all: $(programs)
 
 clean:
-\t@rm -f {adjuncts}
+\t@rm -f $(needless) {adjuncts}
 
 cleaner: clean
 \t@rm -f $(programs)
