@@ -45,7 +45,7 @@ for folder in folders:
             with open(path) as code:
                 for line in code:
                     match = re.match(
-                        r'\s*(use|program|module)\s+(\w+)', line, re.I)
+                        r'\s*(use|program|module)\s+(\w+)\s*$', line, re.I)
 
                     if match:
                         statement, name = match.groups()
