@@ -20,7 +20,7 @@ preamble = preamble or '''
 compiler = gfortran
 
 ifeq ($(compiler), gfortran)
-  optional = -std=f2003 -Wall -pedantic
+  options = -std=f2003 -Wall -pedantic
 endif
 '''
 
@@ -124,7 +124,7 @@ $(programs):
 
 %.o: %.f90
 \t@echo compile $*
-\t@$(compiler) $(optional) -c $< -o $@
+\t@$(compiler) $(options) -c $< -o $@
 
 {components}
 
