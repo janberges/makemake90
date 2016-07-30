@@ -22,6 +22,8 @@ compiler = gfortran
 ifeq ($(compiler), gfortran)
   options = -std=f2003 -Wall -pedantic
 endif
+
+needless = *.mod
 '''
 
 preamble = preamble.strip()
@@ -84,9 +86,6 @@ for doto in components.values():
 for target in references.keys():
     if target not in related:
         del references[target]
-
-related |= set(name + '.mod'
-    for name, doto in companions.items() if doto in related)
 
 def join(these):
     return ' '.join(sorted(these))
