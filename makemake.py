@@ -119,7 +119,7 @@ cleaner: clean
 
 $(programs):
 \t@echo link $@
-\t@$(compiler) -o $@ $^ $(external)
+\t@$(compiler) -o $@ $^ $(external) $(external_$@)
 
 %.o: %.f90
 \t@echo compile $*
