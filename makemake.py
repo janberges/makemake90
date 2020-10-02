@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import re
@@ -13,7 +13,7 @@ if os.path.exists('makefile'):
 
             preamble += line
         else:
-            print 'Unknown Makefile already exists'
+            print('Unknown Makefile already exists')
             raise SystemExit
 
 preamble = preamble or '''
