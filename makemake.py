@@ -112,7 +112,7 @@ for doto in components.values():
 
     related |= doto
 
-for target in references.keys():
+for target in list(references.keys()):
     if target not in related:
         del references[target]
 
