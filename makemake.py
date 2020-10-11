@@ -151,7 +151,7 @@ $(programs):
 
 {args[obj]}/%.o: {args[src]}/%.f90
 \t@echo compile $*
-\t@$(compiler) $(options) -c $< -o $@
+\t@$(compiler) $(options) $(options_$*) -c $< -o $@
 
 {components}
 
