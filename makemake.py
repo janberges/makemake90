@@ -32,26 +32,22 @@ if os.path.exists('makefile'):
             raise SystemExit
 
 preamble = preamble or '''
-compiler = gfortran
-mode = optimize
+FC = gfortran
 
-ifeq ($(compiler), gfortran)
-  ifeq ($(mode), validate)
-    options = -std=f2003 -Wall -pedantic
-  else ifeq ($(mode), optimize)
-    options = -O3
-  endif
-  override options += -J{0}
-else ifeq ($(compiler), ifort)
-  ifeq ($(mode), validate)
-    options = -O0 -warn all
-  else ifeq ($(mode), optimize)
-    options = -O3
-  endif
-  override options += -module {0}
-endif
+flags_gfortran = -std=f2008 -Wall -pedantic
+flags_ifort = -O0 -warn all
 
-needless = *.mod
+FFLAGS = ${{flags_$(FC)}}
+
+# exception.o: FFLAGS += -Wno-maybe-uninitialized
+# LDLIBS = -llapack -lblas
+
+modules_gfortran = -J{0}
+modules_ifort = -module {0}
+
+override FFLAGS += ${{modules_$(FC)}}
+
+needless = {0}/*.mod
 '''.format(args['mod'])
 
 preamble = preamble.strip()
@@ -146,12 +142,10 @@ cleaner: clean
 \t@rm -f $(programs)
 
 $(programs):
-\t@echo link $@
-\t@$(compiler) -o $@ $^ $(external) $(external_$@)
+\t$(FC) -o $@ $^ $(LDLIBS)
 
 {args[obj]}/%.o: {args[src]}/%.f90
-\t@echo compile $*
-\t@$(compiler) $(options) $(options_$*) -c $< -o $@
+\t$(FC) $(FFLAGS) -c $< -o $@
 
 {components}
 
