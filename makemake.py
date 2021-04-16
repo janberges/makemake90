@@ -136,10 +136,10 @@ programs = {programs}
 all: $(programs)
 
 clean:
-\t@rm -f $(needless) {adjuncts}
+\trm -f $(needless) {adjuncts}
 
 cleaner: clean
-\t@rm -f $(programs)
+\trm -f $(programs)
 
 $(programs):
 \t$(FC) -o $@ $^ $(LDLIBS)
