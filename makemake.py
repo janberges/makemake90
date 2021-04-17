@@ -82,13 +82,13 @@ for folder in folders:
                     if match:
                         statement, name = match.groups()
 
-                        if (statement == 'use'):
+                        if statement == 'use':
                             references[doto].add(name)
 
-                        elif (statement == 'module'):
+                        elif statement == 'module':
                             companions[name] = doto
 
-                        elif (statement == 'program'):
+                        elif statement == 'program':
                             components['%s/%s' % (args['bin'], name)] = {doto}
 
 for target, modules in references.items():
