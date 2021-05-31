@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
 
+'''Usage: makemake.py [src=...] [obj=...] [mod=...] [bin=...]
+
+Optional arguments specify places for source (.f90), object (.o), module
+(.mod), and executable files. They all default to the currect directory.
+'''
+
 import os
 import re
 import sys
 
 args = {
-    'bin': '.',
     'src': '.',
     'obj': '.',
     'mod': '.',
+    'bin': '.',
     }
 
 for arg in sys.argv[1:]:
@@ -28,8 +34,7 @@ if os.path.exists('makefile'):
 
             preamble += line
         else:
-            print('Unknown Makefile already exists')
-            raise SystemExit
+            raise SystemExit('Unknown Makefile already exists')
 
 preamble = preamble or '''
 FC = gfortran
