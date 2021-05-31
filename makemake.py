@@ -69,8 +69,8 @@ for folder in folders:
             folders.append(path)
 
         elif path.endswith('.f90'):
-            doto = re.sub('^%s\/' % args['src'], '%s/' % args['obj'], path)
-            doto = re.sub('\.f90$', '.o', doto)
+            doto = re.sub('^%s/' % args['src'], '%s/' % args['obj'], path)
+            doto = re.sub(r'\.f90$', '.o', doto)
 
             references[doto] = set()
 
@@ -152,7 +152,7 @@ $(programs):
 {references}
 '''.format(**vars())
 
-content = re.sub(r'(^|\s)\.\/', r'\1', content)
+content = re.sub(r'(^|\s)\./', r'\1', content)
 
 with open('makefile', 'w') as makefile:
     makefile.write(preamble)
