@@ -23,6 +23,8 @@ for arg in sys.argv[1:]:
 
         if key in args:
             args[key] = value
+    else:
+        raise SystemExit(__doc__.rstrip())
 
 preamble = ''
 
