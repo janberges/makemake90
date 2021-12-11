@@ -149,7 +149,7 @@ cleaner: clean
 \trm -f $(programs)
 
 $(programs):
-\t$(FC) -o $@ $^ $(LDLIBS)
+\t$(FC) $(FFLAGS) -o $@ $^ $(LDLIBS)
 
 {args[obj]}/%.o: {args[src]}/%.f90
 \t$(FC) $(FFLAGS) -c $< -o $@
