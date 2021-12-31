@@ -96,7 +96,8 @@ for folder in folders:
                             companions[name] = doto
 
                         elif statement == 'program':
-                            components['%s/%s' % (args['bin'], name)] = {doto}
+                            components['%s/%s' % (args['bin'],
+                                name.replace('_dot_', '.'))] = {doto}
 
 for target, modules in references.items():
     references[target] = set(companions[name]
