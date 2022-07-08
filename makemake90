@@ -191,3 +191,10 @@ with open(filename, 'w') as makefile:
 
 {epilogue}
 '''.format(**vars()))
+
+for mkdir in set(args.values()) | set(map(os.path.dirname, related)):
+    if not os.path.isdir(mkdir):
+        os.makedirs(os.path.realpath(mkdir))
+
+        print('Created folder "%s" required to make project'
+            % os.path.normpath(mkdir))
