@@ -1,25 +1,19 @@
 .PHONY: all clean
 
-w = 19
-h = 11
-in = 2.54
-
-all: makemake90.png makemake90_square.png makemake90_banner.png
+all: makemake90.pdf makemake90.png makemake90_square.png makemake90_banner.png
 
 %.pdf: %.tex
 	pdflatex --interaction=batchmode $*
 
-makemake90.png: makemake90.pdf
-	convert -density `perl -e "print 640 / ($(w) / $(in))"` $< \
-        -background black -flatten PNG8:$@
+makemake90.png: makemake90.svg
+	inkscape -w 380 -b white -o $@ $<
+	python3 optimize.py $@ $@
 
-makemake90_square.png: makemake90.pdf
-	convert -density `perl -e "print 640 / ($(w) / $(in))"` $< \
-        -background black -gravity center -extent 640x640 PNG8:$@
+makemake90_square.png: makemake90.png
+	convert $< -background black -gravity center -extent 380x380 $@
 
-makemake90_banner.png: makemake90.pdf
-	convert -density `perl -e "print 480 / ($(h) / $(in))"` $< \
-        -background black -gravity center -extent 1280x640 PNG8:$@
+makemake90_banner.png: makemake90.png
+	convert $< -background black -gravity center -extent 1280x640 $@
 
 clean:
-	rm -f *.aux *.log *.pdf *.png
+	rm -f *.aux *.log *.pdf *_*.png

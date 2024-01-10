@@ -5,3 +5,5 @@
 *.png
 build
 dist
+
+!makemake90.png
