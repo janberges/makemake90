@@ -3,6 +3,7 @@
 *.log
 *.pdf
 *.png
+__pycache__
 build
 dist
 
