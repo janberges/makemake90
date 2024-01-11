@@ -67,18 +67,6 @@ def parameters(*filenames, **args):
         else:
             raise SystemExit(__doc__.rstrip())
 
-    preamble = preamble or '''
-FC = gfortran
-
-flags_gfortran = -std=f2008 -Wall -pedantic
-flags_ifort = -O0 -warn all
-
-FFLAGS = ${flags_$(FC)}
-
-# exception.o: FFLAGS += -Wno-maybe-uninitialized
-# LDLIBS = -llapack -lblas
-'''
-
     preamble = preamble.strip()
     epilogue = epilogue.strip()
 
@@ -255,7 +243,21 @@ $(programs):
     content = re.sub(r'(^|\s)\./', r'\1', content)
 
     with open(filename, 'w') as makefile:
-        makefile.write(preamble)
+        if preamble:
+            makefile.write(preamble)
+        else:
+            makefile.write('''
+FC = gfortran
+
+flags_gfortran = -std=f2008 -Wall -pedantic
+flags_ifort = -O0 -warn all
+
+FFLAGS = ${flags_$(FC)}
+
+# exception.o: FFLAGS += -Wno-maybe-uninitialized
+# LDLIBS = -llapack -lblas
+'''.strip())
+
         makefile.write(content)
 
         if epilogue:
