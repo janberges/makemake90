@@ -1,13 +1,14 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["flit_core>=3.4"]
+build-backend = "flit_core.buildapi"
 
 [project]
 name = "makemake90"
-version = "0.1"
+dynamic = ["version"]
 authors = [{name = "Jan Berges"}]
 description = "Generate Makefiles for modular Fortran programs"
 readme = "README.md"
+license = {file = "LICENSE"}
 urls = {Homepage = "https://github.com/janberges/makemake90"}
 classifiers = [
     "License :: OSI Approved :: Zero-Clause BSD (0BSD)",
@@ -15,6 +16,3 @@ classifiers = [
 ]
 requires-python = ">=2.7"
 scripts = {makemake90 = "makemake90:main"}
-
-[tool.setuptools]
-py-modules = ['makemake90']
