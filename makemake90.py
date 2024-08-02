@@ -209,6 +209,7 @@ def makefile(filename='Makefile', components={}, references={}, related=None,
     modules_flag = '' if mod == '.' else '''
 modules_gfortran = -J{0}
 modules_ifort = -module {0}
+modules_ifx = ${{modules_ifort}}
 
 override FFLAGS += ${{modules_$(FC)}}
 '''.format(mod)
@@ -253,6 +254,7 @@ FC = gfortran
 
 flags_gfortran = -std=f2008 -pedantic -Wall -Wno-maybe-uninitialized
 flags_ifort = -O0 -stand f08 -warn all
+flags_ifx = ${flags_ifort}
 
 FFLAGS = ${flags_$(FC)}
 
