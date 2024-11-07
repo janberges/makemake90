@@ -7,7 +7,7 @@ Optional arguments specify places for source (.f90), object (.o), module
 There is no need to specify them again when updating existing makefiles.
 '''
 
-__version__ = '0.2'
+__version__ = '0.3'
 
 import os
 import re
