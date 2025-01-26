@@ -134,7 +134,7 @@ def dependencies(src='.', obj='.', bin='.', **ignore):
                             line = line.rstrip('&')
                             line += next(code).lstrip('&')
 
-                        match = re.match('(use|program|module)'
+                        match = re.match(r'(use(?:\b.*::)?|program|module)'
                             r'\s+(\w+)\s*(?:$|,)', line, re.I)
 
                         if match:
