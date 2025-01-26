@@ -187,6 +187,8 @@ def dependencies(src='.', obj='.', bin='.', **ignore):
     for target in list(references.keys()):
         if target not in related:
             del references[target]
+        else:
+            references[target].discard(target)
 
     return components, references, related
 
