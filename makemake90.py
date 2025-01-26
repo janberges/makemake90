@@ -119,6 +119,9 @@ def dependencies(src='.', obj='.', bin='.', **ignore):
 
                 with open(path) as code:
                     for line in code:
+                        if re.match(r'\s*!', line):
+                            continue
+
                         match = re.match(r'\s*(use|program|module)'
                             r'\s+(\w+)\s*(?:$|,)', line, re.I)
 
