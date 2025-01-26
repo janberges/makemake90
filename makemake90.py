@@ -103,9 +103,9 @@ def dependencies(src='.', obj='.', bin='.', **ignore):
 
     def preprocess(lines):
         for line in lines:
-            line = re.sub('!.*', '', line)
+            line = re.sub('!.*', '', line).strip()
 
-            if line.strip():
+            if line:
                 yield line
 
     for folder in folders:
@@ -130,11 +130,11 @@ def dependencies(src='.', obj='.', bin='.', **ignore):
                     code = preprocess(code)
 
                     for line in code:
-                        while re.search(r'&\s*$', line):
-                            line = line.rstrip().rstrip('&')
-                            line += next(code).lstrip().lstrip('&')
+                        while line.endswith('&'):
+                            line = line.rstrip('&')
+                            line += next(code).lstrip('&')
 
-                        match = re.match(r'\s*(use|program|module)'
+                        match = re.match('(use|program|module)'
                             r'\s+(\w+)\s*(?:$|,)', line, re.I)
 
                         if match:
@@ -158,10 +158,10 @@ def dependencies(src='.', obj='.', bin='.', **ignore):
                                 references[doto].add(name)
 
                         if in_module:
-                            if re.match(r'\s*end module', line, re.I):
+                            if re.match('end module', line, re.I):
                                 in_module = False
                         else:
-                            match = re.match(r'\s*(subroutine|function)'
+                            match = re.match('(subroutine|function)'
                                 r'\s+(\w+)', line, re.I)
 
                             if match:
