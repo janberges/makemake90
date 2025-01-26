@@ -122,6 +122,10 @@ def dependencies(src='.', obj='.', bin='.', **ignore):
                         if re.match(r'\s*!', line):
                             continue
 
+                        while re.search(r'&\s*$', line):
+                            line = line.rstrip().rstrip('&')
+                            line += next(code).lstrip().lstrip('&')
+
                         match = re.match(r'\s*(use|program|module)'
                             r'\s+(\w+)\s*(?:$|,)', line, re.I)
 
