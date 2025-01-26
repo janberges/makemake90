@@ -117,6 +117,8 @@ def dependencies(src='.', obj='.', bin='.', **ignore):
 
                 references[doto] = set()
 
+                in_module = False
+
                 with open(path) as code:
                     for line in code:
                         if re.match(r'\s*!', line):
@@ -137,10 +139,27 @@ def dependencies(src='.', obj='.', bin='.', **ignore):
 
                             elif statement == 'module':
                                 companions[name] = doto
+                                in_module = True
 
                             elif statement == 'program':
                                 components['%s/%s' % (bin,
                                     name.replace('_dot_', '.'))] = {doto}
+
+                        match = re.match(r'.*\bexternal\b.*::(.*)', line, re.I)
+
+                        if match:
+                            for name in re.findall(r'\w+', match.group(1)):
+                                references[doto].add(name)
+
+                        if in_module:
+                            if re.match(r'\s*end module', line, re.I):
+                                in_module = False
+                        else:
+                            match = re.match(r'\s*(subroutine|function)'
+                                r'\s+(\w+)', line, re.I)
+
+                            if match:
+                                companions[match.group(2)] = doto
 
     for target, modules in references.items():
         references[target] = set(companions[name]
