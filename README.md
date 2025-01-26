@@ -30,3 +30,6 @@ Build your project:
 Update Makefile after further work on project:
 
     makemake90
+
+**Note:** Procedures that are not part of a module are only considered if the
+code that uses them lists them in an `EXTERNAL` statement.
