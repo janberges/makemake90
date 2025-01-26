@@ -101,6 +101,13 @@ def dependencies(src='.', obj='.', bin='.', **ignore):
 
     folders = [src]
 
+    def preprocess(lines):
+        for line in lines:
+            line = re.sub('!.*', '', line)
+
+            if line.strip():
+                yield line
+
     for folder in folders:
         for file in os.listdir(folder):
             if file.startswith('.'):
@@ -120,10 +127,9 @@ def dependencies(src='.', obj='.', bin='.', **ignore):
                 in_module = False
 
                 with open(path) as code:
-                    for line in code:
-                        if re.match(r'\s*!', line):
-                            continue
+                    code = preprocess(code)
 
+                    for line in code:
                         while re.search(r'&\s*$', line):
                             line = line.rstrip().rstrip('&')
                             line += next(code).lstrip().lstrip('&')
