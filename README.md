@@ -1,7 +1,5 @@
 # Generate Makefiles for modular Fortran programs
 
-![makemake90 logo](https://raw.githubusercontent.com/janberges/makemake90/master/logo/makemake90.svg)
-
 ## Installation
 
 Either from PyPI:

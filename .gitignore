@@ -6,5 +6,7 @@
 __pycache__
 build
 dist
+doctrees
+html
 
 !makemake90.png
