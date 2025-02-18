@@ -1,4 +1,6 @@
-# Generate Makefiles for modular Fortran programs
+# makemake90
+
+Generate Makefiles for modular Fortran programs.
 
 ## Installation
 
