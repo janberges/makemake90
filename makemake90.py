@@ -270,7 +270,7 @@ $(programs):
 \t$(FC) $(FFLAGS) -o $@ $^ $(LDLIBS)
 
 {obj}/%.o: {src}/%.f90
-\t$(FC) $(FFLAGS) -c $< -o $@
+\t$(FC) $(FFLAGS) -o $@ -c $<
 
 {components}
 
