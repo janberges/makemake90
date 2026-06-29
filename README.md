@@ -6,11 +6,16 @@ Generate Makefiles for modular Fortran programs.
 
 Either from PyPI:
 
-    python3 -m pip install makemake90
+    python3 -m pip install --upgrade makemake90
 
-Or from GitHub:
+From conda-forge:
 
-    python3 -m pip install git+https://github.com/janberges/makemake90
+    conda install conda-forge::makemake90
+
+Or from the repository:
+
+    git clone https://github.com/janberges/makemake90
+    python3 -m pip install -e makemake90
 
 ## Synopsis
 
