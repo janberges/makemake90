@@ -9,7 +9,7 @@ authors = [{name = "Jan Berges"}]
 description = "Generate Makefiles for modular Fortran programs"
 readme = "README.md"
 license = {file = "LICENSE"}
-urls = {Homepage = "https://github.com/janberges/makemake90"}
+urls = {Homepage = "https://codeberg.org/janberges/makemake90"}
 classifiers = [
     "License :: OSI Approved :: Zero-Clause BSD (0BSD)",
     "Programming Language :: Python",

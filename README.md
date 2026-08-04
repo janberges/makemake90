@@ -14,7 +14,7 @@ From conda-forge:
 
 Or from the repository:
 
-    git clone https://github.com/janberges/makemake90
+    git clone https://codeberg.org/janberges/makemake90
     python3 -m pip install -e makemake90
 
 ## Synopsis
