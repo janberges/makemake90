@@ -241,11 +241,11 @@ def makefile(filename='Makefile', components={}, references={}, related=None,
         for key, value in sorted(args.items()) if value != '.')
 
     modules_flag = '' if mod == '.' else '''
-modules_gfortran = -J{0}
-modules_ifort = -module {0}
-modules_ifx = ${{modules_ifort}}
-modules_flang = -module-dir build
-modules_flang-new = ${{modules_flang}}
+modules_gfortran := -J{0}
+modules_ifort := -module {0}
+modules_ifx := ${{modules_ifort}}
+modules_flang := -module-dir build
+modules_flang-new := ${{modules_flang}}
 
 override FFLAGS += ${{modules_$(FC)}}
 '''.format(mod)
@@ -256,7 +256,7 @@ override FFLAGS += ${{modules_$(FC)}}
 {modules_flag}
 needless += {adjuncts} {mod}/*.mod
 
-programs = {programs}
+programs := {programs}
 
 .PHONY: all clean cleaner
 
@@ -286,18 +286,18 @@ $(programs):
             makefile.write(preamble)
         else:
             makefile.write('''
-FC = gfortran
+FC := gfortran
 
-flags_gfortran = -std=f2008 -pedantic -Wall -Wno-maybe-uninitialized
-flags_ifort = -O0 -stand f08 -warn all
-flags_ifx = ${flags_ifort}
-flags_flang = -Werror -fopenmp
-flags_flang-new = ${flags_flang}
+flags_gfortran := -std=f2008 -pedantic -Wall -Wno-maybe-uninitialized
+flags_ifort := -O0 -stand f08 -warn all
+flags_ifx := ${flags_ifort}
+flags_flang := -Werror -fopenmp
+flags_flang-new := ${flags_flang}
 
-FFLAGS = ${flags_$(FC)}
+FFLAGS := ${flags_$(FC)}
 LDFLAGS := ${FFLAGS}
 
-# dependent_program: LDLIBS = -llapack -lblas
+# dependent_program: LDLIBS := -llapack -lblas
 '''.strip())
 
         makefile.write(content)
