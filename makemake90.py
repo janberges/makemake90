@@ -267,7 +267,7 @@ cleaner: clean
 \trm -f $(programs)
 
 $(programs):
-\t$(FC) $(FFLAGS) -o $@ $^ $(LDLIBS)
+\t$(FC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 {obj}/%.o: {src}/%.f90
 \t$(FC) $(FFLAGS) -o $@ -c $<
@@ -291,6 +291,7 @@ flags_ifort = -O0 -stand f08 -warn all
 flags_ifx = ${flags_ifort}
 
 FFLAGS = ${flags_$(FC)}
+LDFLAGS := ${FFLAGS}
 
 # dependent_program: LDLIBS = -llapack -lblas
 '''.strip())
