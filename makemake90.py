@@ -273,16 +273,13 @@ $(programs):
 
 {references}
 '''.format(
-        src=src,
-        obj=obj,
-        mod=mod,
-
         programs=join(components),
         adjuncts=join(related),
 
         components=listing(components),
         references=listing(references),
-    )
+
+        **args)
 
     content = re.sub(r'(^|\s)\./', r'\1', content)
 
