@@ -241,11 +241,11 @@ def makefile(filename='Makefile', components={}, references={}, related=None,
         content += '''
 modules_gfortran := -J{0}
 modules_ifort := -module {0}
-modules_ifx := ${{modules_ifort}}
+modules_ifx := $(modules_ifort)
 modules_flang := -module-dir build
-modules_flang-new := ${{modules_flang}}
+modules_flang-new := $(modules_flang)
 
-override FFLAGS += ${{modules_$(FC)}}
+override FFLAGS += $(modules_$(FC))
 '''.format(mod)
 
     content += '''
@@ -292,12 +292,12 @@ FC := gfortran
 
 flags_gfortran := -std=f2008 -pedantic -Wall -Wno-maybe-uninitialized
 flags_ifort := -O0 -stand f08 -warn all
-flags_ifx := ${flags_ifort}
+flags_ifx := $(flags_ifort)
 flags_flang := -Werror -fopenmp
-flags_flang-new := ${flags_flang}
+flags_flang-new := $(flags_flang)
 
-FFLAGS := ${flags_$(FC)}
-LDFLAGS := ${FFLAGS}
+FFLAGS := $(flags_$(FC))
+LDFLAGS := $(FFLAGS)
 
 # dependent_program: LDLIBS := -llapack -lblas
 '''.strip())
